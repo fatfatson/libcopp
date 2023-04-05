@@ -12,7 +12,7 @@
 #include <libcopp/utils/config/stl_include_suffix.h>  // NOLINT(build/include_order)
 // clang-format on
 
-#include "config/libcopp_build_features.h"
+#include "libcopp/utils/config/libcopp_build_features.h"
 
 LIBCOPP_COPP_NAMESPACE_BEGIN
 namespace util {

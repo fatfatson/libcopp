@@ -16,6 +16,9 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.20.0")
   cmake_policy(SET CMP0117 NEW)
 endif()
 
+set(VCPKG_CRT_LINKAGE "static")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 enable_testing()
 
 project(
@@ -123,7 +126,9 @@ set(LIBCOPP_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 set(LIBCOPP_VERSION "${PROJECT_VERSION}")
 
 configure_file("${PROJECT_LIBCOPP_ROOT_INC_DIR}/libcopp/utils/config/libcopp_build_features.h.in"
-               "${PROJECT_LIBCOPP_ROOT_INC_DIR}/libcopp/utils/config/libcopp_build_features.h" @ONLY)
+               "${CMAKE_CURRENT_BINARY_DIR}/libcopp/utils/config/libcopp_build_features.h" @ONLY)
+configure_file("${PROJECT_LIBCOPP_ROOT_INC_DIR}/libcopp/utils/config/compile_optimize.h"
+               "${CMAKE_CURRENT_BINARY_DIR}/libcopp/utils/config/compile_optimize.h" @ONLY)
 
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
   get_filename_component(CMAKE_CXX_COMPILER_WE ${CMAKE_CXX_COMPILER} NAME_WE CACHE)
